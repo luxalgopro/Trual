@@ -32,12 +32,10 @@ dispatcher = Dispatcher(bot, None, use_context=True)
 dispatcher.add_handler(CommandHandler("start", start))
 dispatcher.add_handler(MessageHandler(Filters.photo, handle_photo))
 
-# Set webhook on startup (for Render)
-@app.before_first_request
-def set_webhook():
+# Flask port
+if __name__ == "__main__":
+    # Manually set webhook
     webhook_url = f"https://{os.environ['RENDER_EXTERNAL_HOSTNAME']}/{BOT_TOKEN}"
     bot.setWebhook(webhook_url)
 
-# Flask port
-if __name__ == "__main__":
     app.run(host='0.0.0.0', port=10000)
