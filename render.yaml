@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: kevofx-telegram-bot
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: python main.py
+    envVars:
+      - key: RENDER_EXTERNAL_HOSTNAME
+        fromService:
+          type: web
+          name: kevofx-telegram-bot
+          property: host
